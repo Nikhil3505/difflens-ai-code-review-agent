@@ -22,7 +22,7 @@
 
 ---
 
-## 2. How It Was Built
+## 2. How I Built It
 
 ```
                ┌────────────────────────────────────────────────────────┐
@@ -58,7 +58,7 @@
 ```
 
 - **Core Agent Loop (`diff_lens/agent.py`)**:
-  1. **Perception**: `UnifiedDiffParser` extracts files, modified lines, additions, deletions, and maps hunk headers to real target line numbers.
+  1. **Perception**: I implemented `UnifiedDiffParser` to extract files, modified lines, additions, deletions, and accurately map hunk headers to real target line numbers.
   2. **Planning & Investigation**: For each changed file, the agent invokes its tools:
      - `inspect_file_context`: Retrieves surrounding file code to evaluate class scopes and global imports.
      - `inspect_test_coverage`: Inspects workspace test files to detect if modified functions have unit test assertions.
@@ -67,7 +67,7 @@
 - **Models & Providers (`diff_lens/llm_client.py`)**:
   - Supports **Google Gemini** (`gemini-1.5-flash`, `gemini-2.0-flash`) and **OpenAI** (`gpt-4o-mini`, custom Ollama endpoints).
   - Uses direct HTTP REST queries via `requests` without heavy proprietary SDK locks.
-  - Includes a **Deterministic Rules & AST Engine** (`diff_lens/rules_engine.py`) as a zero-key offline fallback.
+  - Built a **Deterministic Rules & AST Engine** (`diff_lens/rules_engine.py`) as a zero-key offline fallback.
 - **Tech Stack**: Python 3.11, Pydantic v2 (strict schema validation), FastAPI & Uvicorn (dashboard), Colorama & Tabulate (CLI), Pytest (testing).
 
 ---
@@ -76,7 +76,7 @@
 
 1. **Truncated Diff Context & Line Drift**:
    - *Problem*: Git diff hunks typically show only 3 lines of surrounding code. LLMs reviewing raw diffs frequently hallucinated variable types or suggested imports that already existed earlier in the file.
-   - *Resolution*: Implemented `FileContextInspector` tool. When reviewing a hunk, the agent queries lines $(start - 10)$ to $(end + 10)$ in the actual repository file, supplying grounded context to the reviewer.
+   - *Resolution*: Implemented `FileContextInspector` tool. When reviewing a hunk, the agent queries lines `(start - 10)` to `(end + 10)` in the actual repository file, supplying grounded context to the reviewer.
 2. **Comment Substring Collision in Static Analysis**:
    - *Problem*: In testing scenario 2 (concurrency race condition), an explanatory comment `# Potential race condition: non-atomic check and debit` caused the concurrency detector to falsely assume the word `"atomic"` meant a concurrency primitive was present!
    - *Resolution*: Stripped comments prior to evaluating concurrency safety keywords and validated AST call nodes directly.
@@ -134,3 +134,4 @@ python -m diff_lens serve --port 8000
 ```bash
 python -m pytest -v
 ```
+
