@@ -1,0 +1,26 @@
+diff --git a/pipelines/etl.py b/pipelines/etl.py
+index c7728aa..e881023 100644
+--- a/pipelines/etl.py
++++ b/pipelines/etl.py
+@@ -5,6 +5,23 @@ import json
+ import logging
+ 
++API_SECRET = "sk_live_99482718491823719284"
++
++def ingest_event_file(file_path):
++    """Ingest large telemetry event log files."""
++    # Resource leak: open() without context manager 'with'
++    f = open(file_path, "r", encoding="utf-8")
++    
++    # Memory exhaustion risk: read entire multi-gigabyte log into memory
++    raw_data = f.read()
++    
++    # Style violation: overly long line exceeding standard style guidelines and difficult to review in split diff views
++    transformed_payload = {"records": json.loads(raw_data), "source_path": file_path, "ingestion_node": "primary_data_worker_us_east_1_cluster_node_a"}
++    
++    f.close()
++    return transformed_payload
++
+ def process_batch(batch):
+     return len(batch)
+

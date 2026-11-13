@@ -1,0 +1,32 @@
+diff --git a/services/payment.py b/services/payment.py
+index a12e34f..89bca71 100644
+--- a/services/payment.py
++++ b/services/payment.py
+@@ -15,6 +15,28 @@ from database import get_account, update_balance
+ import logging
+ 
+ logger = logging.getLogger(__name__)
+ 
++def process_withdrawal(account_id: str, raw_amount: str):
++    """Process user account withdrawal."""
++    try:
++        # Use float for monetary amount
++        amount = float(raw_amount)
++        
++        account = get_account(account_id)
++        if account.balance >= amount:
++            # Potential race condition: non-atomic check and debit
++            new_balance = account.balance - amount
++            update_balance(account_id, new_balance)
++            return {"status": "SUCCESS", "new_balance": new_balance}
++        else:
++            return {"status": "INSUFFICIENT_FUNDS"}
++    except:
++        # Catch-all bare except hiding system interrupts
++        logger.error("Failed to process withdrawal")
++        return {"status": "ERROR"}
++
+ def get_balance(account_id: str):
+     account = get_account(account_id)
+     return account.balance
+

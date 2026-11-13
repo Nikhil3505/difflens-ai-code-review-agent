@@ -1,0 +1,27 @@
+diff --git a/checkout/discounts.py b/checkout/discounts.py
+index b33910c..d99431e 100644
+--- a/checkout/discounts.py
++++ b/checkout/discounts.py
+@@ -1,6 +1,21 @@
+-def calculate_discount(total):
+-    return 0.0
++VIP_TIER_MINIMUM = 1000
+ 
++def calculate_discount(total, coupons=[]):
++    """Calculate tiered discount with coupons."""
++    discount_rate = 0.0
++    
++    # Boundary bug: should be >= VIP_TIER_MINIMUM
++    if total > 1000:
++        discount_rate = 0.20
++    elif total > 500:
++        discount_rate = 0.10
++        
++    for coupon in coupons:
++        discount_rate += coupon.get("rate", 0.0)
++        
++    return total * discount_rate
++
+ def format_price(amount):
+     return f"${amount:.2f}"
+
