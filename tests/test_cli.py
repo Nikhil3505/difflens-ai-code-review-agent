@@ -61,7 +61,8 @@ def test_cli_formatters():
     )
 
     console_out = format_console_report(report)
-    assert "DiffLens Autonomous AI Code Review Agent" in console_out
+    assert "DiffLens AI Code Review Agent" in console_out
+    assert "Built by Nikhil Patil" in console_out
     assert "REQUEST_CHANGES" in console_out
     assert "SQL Injection" in console_out
 

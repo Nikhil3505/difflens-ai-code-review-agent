@@ -18,7 +18,7 @@ def format_console_report(report: ReviewReport) -> str:
     """Format the review report with colors and structured tables for terminal output."""
     lines = []
     lines.append(f"{Style.BRIGHT}{Fore.CYAN}{'=' * 75}")
-    lines.append(f"{Style.BRIGHT}{Fore.CYAN}       DiffLens Autonomous AI Code Review Agent - Report")
+    lines.append(f"{Style.BRIGHT}{Fore.CYAN}       DiffLens AI Code Review Agent  |  Built by Nikhil Patil")
     lines.append(f"{Style.BRIGHT}{Fore.CYAN}{'=' * 75}{Style.RESET_ALL}\n")
 
     # Meta
@@ -98,7 +98,7 @@ def format_markdown_report(report: ReviewReport) -> str:
     """Format report as GitHub PR Comment compatible Markdown."""
     md = []
     md.append("# 🔍 DiffLens AI Code Review Report\n")
-    md.append(f"**Target:** `{report.target_source}` | **Mode:** `{report.mode}` | **Audit Time:** {report.execution_time_seconds}s\n")
+    md.append(f"**Target:** `{report.target_source}` | **Mode:** `{report.mode}` | **Audit Time:** {report.execution_time_seconds}s | **Author:** Nikhil Patil\n")
 
     # Verdict
     verdict_badge = {

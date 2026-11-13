@@ -1,5 +1,10 @@
 # ⚡ DiffLens: Autonomous AI Code Review Agent
 
+> **Author:** Nikhil Patil (`patilnikhil3505@gmail.com`)  
+> *Built by Nikhil Patil for AI Agent Technical Evaluation*
+
+---
+
 > An agentic code reviewer that inspects Git diffs and Pull Requests to deliver structured, actionable feedback across **Possible Bugs**, **Risks**, **Missing Tests**, and **Style Issues**.
 
 ---

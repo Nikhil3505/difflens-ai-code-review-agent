@@ -554,7 +554,7 @@ HTML_CONTENT = r"""<!DOCTYPE html>
     <div class="brand">
       <span class="brand-icon">⚡</span>
       <span class="brand-name">DiffLens</span>
-      <span class="badge-sub">Autonomous AI Review Agent</span>
+      <span class="badge-sub">Built by Nikhil Patil</span>
     </div>
     <div class="header-actions">
       <button class="btn btn-secondary" onclick="exportMarkdown()">📋 Copy PR Markdown</button>
@@ -564,6 +564,11 @@ HTML_CONTENT = r"""<!DOCTYPE html>
       </button>
     </div>
   </header>
+
+  <footer style="position: fixed; bottom: 0; left: 0; right: 0; background: #161b22; border-top: 1px solid #30363d; padding: 6px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: #8b949e; z-index: 99;">
+    <span>DiffLens Code Review Engine v1.0.0</span>
+    <span style="color: #58a6ff; font-weight: 600;">⚡ Built by Nikhil Patil</span>
+  </footer>
 
   <div class="container">
     <!-- Samples Selection Toolbar -->

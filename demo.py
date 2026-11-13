@@ -26,7 +26,7 @@ def run_demo(output_format: str = "console"):
     ]
 
     print("\n" + "=" * 80)
-    print("               🚀 DiffLens AI Code Review Agent - Live Demo")
+    print("        🚀 DiffLens AI Code Review Agent  |  Built by Nikhil Patil")
     print("=" * 80)
     print("DiffLens parses unified git diffs, investigates with tools (context inspection,")
     print("workspace test scanning, AST analysis), and returns structured feedback across:")
